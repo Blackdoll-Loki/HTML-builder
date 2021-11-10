@@ -17,6 +17,7 @@ process.on('SIGINT', function(){
 
 rl.on('line', (text) => {
     writeStream.write(text);
+    writeStream.write('\n');
     if(text === 'exit'){
         console.log('Goodbuy');
         exit();
