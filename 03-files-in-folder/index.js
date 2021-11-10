@@ -9,15 +9,15 @@ fs.readdir(filePath,{ withFileTypes: false}, (err, files) => {
     } else{
         console.log('\nCurrent directory file names');
         files.forEach((file) => {
-            let name = file.replace(/.\w+$/, '');
-            let ext = path.extname(file).replace('.', '');
-            fs.stat(path.join(filePath, file), (err, stats) => {
-                if(err){
-                    console.log(err);
-                } else {
-                    console.log(`${name} - ${ext} - ${stats.size/1000}kb`);
-                }
-            });
+                let name = file.replace(/.\w+$/, '');
+                let ext = path.extname(file).replace('.', '');
+                fs.stat(path.join(filePath, file), (err, stats) => {
+                    if(err){
+                        console.log(err);
+                    } else if(stats.isFile()){
+                        console.log(`${name} - ${ext} - ${stats.size/1000}kb`);
+                    }
+                });
         });
     }
 });
